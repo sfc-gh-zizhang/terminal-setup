@@ -1,4 +1,5 @@
-sudo su
+#!/bin/bash
+
 yum groupinstall "Development tools"
 yum install ncurses-devel
 wget https://sourceforge.net/projects/zsh/files/zsh/5.6.2/zsh-5.6.2.tar.xz/download
