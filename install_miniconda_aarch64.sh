@@ -1,9 +1,6 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]
-    then echo "error: please run this script with ROOT privileges"
-    exit
-fi
+sudo yum -y install patchelf
 
 export OLD_PATH=$PATH
 export PATH=/opt/rh/devtoolset-8/root/usr/bin:$PATH
@@ -14,7 +11,6 @@ if [[ $response == "y" || $response == "Y" ]]; then
     echo "confirmed"
 else
     echo "exit, the version of gcc is not correct"
-    export PATH=$OLD_PATH
     exit 1
 fi
 make -v
@@ -24,41 +20,35 @@ if [[ $response == "y" || $response == "Y" ]]; then
     echo "confirmed"
 else
     echo "exit, the version of make is not correct"
-    export PATH=$OLD_PATH
     exit 1
 fi
 
-echo "Downloading glibc 2.28"
-wget -c http://ftp.gnu.org/gnu/glibc/glibc-2.28.tar.gz
-tar -xf glibc-2.28.tar.gz
-cd glibc-2.28
+echo "Installing glibc"
+libc_version=2.28
+wget -c http://ftp.gnu.org/gnu/glibc/glibc-${libc_version}.tar.gz
+tar -xf glibc-${libc_version}.tar.gz
+cd glibc-${libc_version}
 mkdir build
 cd build
-../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
-make
-make install
-cd ../..
-rm glibc-2.28.tar.gz
-rm -rf ./glibc-2.28
+../configure --prefix=/opt/glibc${libc_version}
+make -j6
+sudo make install
 
-strings /lib64/libc.so.6 | grep GLIBC_2.28
-echo "Please confirm if GLIBC_2.28 is installed. If yes, please reply with y. If no, please reply with n"
-read response
-if [[ $response == "y" || $response == "Y" ]]; then
-    echo "confirmed"
-else
-    echo "exit, GLIBC_2.28 is not installed successfully"
-    export PATH=$OLD_PATH
-    exit 1
-fi
-
-echo "Downloading miniconda aarch64"
+echo "Installing miniconda3"
 wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
+sed -i '344i\
+patchelf --set-interpreter /opt/glibc2.28/lib/ld-linux-aarch64.so.1 $CONDA_EXEC\
+patchelf --set-rpath /opt/glibc2.28/lib:/usr/lib64 $CONDA_EXEC' Miniconda3-latest-Linux-aarch64.sh
 
-echo "Installing miniconda aarch64"
-sh Miniconda3-latest-Linux-aarch64.sh -u
+echo "Reminder: do not install to the default directory: /root/miniconda3. Enter any key to continue."
+read response
+sudo bash Miniconda3-latest-Linux-aarch64.sh -u
 
-rm -rf Miniconda3-latest-Linux-aarch64.sh
-export PATH=$OLD_PATH
+echo 
+"""
+Use following commands to let python use glibc2.28:
 
-echo "Please use conda -V to confirm the installation"
+patchelf --set-interpreter /opt/glibc2.28/lib/ld-linux-aarch64.so.1 $CONDA_DIR/bin/python
+patchelf --set-rpath /opt/glibc2.28/lib:/usr/lib64 $CONDA_DIR/bin/python
+
+"""
