@@ -41,7 +41,7 @@ cd ../..
 rm glibc-2.28.tar.gz
 rm -rf ./glibc-2.28
 
-strings /lib64/libc.so.6 | grep GLIBC
+strings /lib64/libc.so.6 | grep GLIBC_2.28
 echo "Please confirm if GLIBC_2.28 is installed. If yes, please reply with y. If no, please reply with n"
 read response
 if [[ $response == "y" || $response == "Y" ]]; then
@@ -58,6 +58,7 @@ wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
 echo "Installing miniconda aarch64"
 sh Miniconda3-latest-Linux-aarch64.sh -u
 
-conda -V
 rm -rf Miniconda3-latest-Linux-aarch64.sh
 export PATH=$OLD_PATH
+
+echo "Please use conda -V to confirm the installation"
