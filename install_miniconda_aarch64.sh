@@ -2,26 +2,26 @@
 
 sudo yum -y install patchelf
 
-# export OLD_PATH=$PATH
-# export PATH=/opt/rh/devtoolset-8/root/usr/bin:$PATH
-# gcc -v
-# echo "Please confirm if the verison of gcc being used is 8.3.1. If yes, please reply with y. If no, please reply with n"
-# read response
-# if [[ $response == "y" || $response == "Y" ]]; then
-#     echo "confirmed"
-# else
-#     echo "exit, the version of gcc is not correct"
-#     exit 1
-# fi
-# make -v
-# echo "Please confirm if the verison of make being used is 4.2.1. If yes, please reply with y. If no, please reply with n"
-# read response
-# if [[ $response == "y" || $response == "Y" ]]; then
-#     echo "confirmed"
-# else
-#     echo "exit, the version of make is not correct"
-#     exit 1
-# fi
+export OLD_PATH=$PATH
+export PATH=/opt/rh/devtoolset-8/root/usr/bin:$PATH
+gcc -v
+echo "Please confirm if the verison of gcc being used is 8.3.1. If yes, please reply with y. If no, please reply with n"
+read response
+if [[ $response == "y" || $response == "Y" ]]; then
+    echo "confirmed"
+else
+    echo "exit, the version of gcc is not correct"
+    exit 1
+fi
+make -v
+echo "Please confirm if the verison of make being used is 4.2.1. If yes, please reply with y. If no, please reply with n"
+read response
+if [[ $response == "y" || $response == "Y" ]]; then
+    echo "confirmed"
+else
+    echo "exit, the version of make is not correct"
+    exit 1
+fi
 
 echo "Installing glibc"
 libc_version=2.28
