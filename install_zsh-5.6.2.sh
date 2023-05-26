@@ -10,3 +10,4 @@ make
 make install
 echo "/usr/local/bin/zsh-5.6.2" >> /etc/shells
 chsh -s /usr/local/bin/zsh-5.6.2
+chsh -s /usr/local/bin/zsh-5.6.2 zizhang
