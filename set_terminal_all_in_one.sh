@@ -18,14 +18,19 @@ RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/
 # Clone the Powerlevel10k theme if it doesn't exist
 if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-	# Check and update ZSH_THEME
-	if grep -q '^ZSH_THEME=".*"' "$ZSHRC"; then
-	    # ZSH_THEME exists, change it to powerlevel10k/powerlevel10k
-	    sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$ZSHRC"
-	else
-	    # ZSH_THEME does not exist, add it
-	    echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> "$ZSHRC"
-	fi
+fi
+ZSHRC="$HOME/.zshrc"
+echo $ZSHRC
+
+# Check and update ZSH_THEME
+if grep -q '^ZSH_THEME=".*"' "$ZSHRC"; then
+    # ZSH_THEME exists, change it to powerlevel10k/powerlevel10k
+    echo "zsh_theme exist"
+    sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$ZSHRC"
+else
+    # ZSH_THEME does not exist, add it
+    echo "zsh_theme does not exist"
+    echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> "$ZSHRC"
 fi
 
 # Clone zsh-autosuggestions plugin if it doesn't exist
