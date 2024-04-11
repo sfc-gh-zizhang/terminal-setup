@@ -1,4 +1,4 @@
-# scripts
+# Setup The Terminal
 ## Install iTerm2
 
 ```
@@ -15,12 +15,13 @@ Choose and download a Nerd Font(https://www.nerdfonts.com/font-downloads).
 
 Go to iTerm2 -> Settings -> Profiles -> Text -> Font.
 
-## Run the scripts
+## Run the script
 ```
 git clone git@github.com:sfc-gh-zizhang/scripts.git
 cd ./scripts
 bash set_terminal_all_in_one.sh
 ```
+And then restart your terminal.
 
 ## After make refresh
 ```
