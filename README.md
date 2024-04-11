@@ -21,3 +21,8 @@ git clone git@github.com:sfc-gh-zizhang/scripts.git
 cd ./scripts
 bash set_terminal_all_in_one.sh
 ```
+
+## After make refresh
+```
+bash set_terminal_all_in_one.sh
+```
