@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# Check if the current shell is not /usr/local/bin/zsh-5.6.2
-if [[ "$(readlink /proc/$$/exe)" != "/usr/local/bin/zsh-5.6.2" ]]; then
-    echo "Current shell is not /usr/local/bin/zsh-5.6.2, attempting to install and switch..."
-    # Attempt to run the installation script for zsh-5.6.2
+desired_shell="/usr/local/bin/zsh-5.6.2"
+
+# Check if the desired shell is in the list of available shells
+
+# Check if desired shell is in the list of available shells
+if chsh -l | grep -q "$desired_shell"; then
+    echo "$desired_shell is available."
+else
+    echo "$desired_shell is not available."
     sudo bash ./install_zsh-5.6.2.sh $USER
 fi
 
