@@ -17,9 +17,11 @@ Go to iTerm2 -> Settings -> Profiles -> Text -> Font.
 
 ## Run the script
 ```
-git clone git@github.com:sfc-gh-zizhang/scripts.git
-cd ./scripts
+git clone git@github.com:sfc-gh-zizhang/terminal-setup.git
+cd ./terminal-setup
 bash set_terminal_all_in_one.sh
+exit and relogin to your cloudvm/devvm
+zsh
 ```
 And then restart your terminal.
 
