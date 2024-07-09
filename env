@@ -1,0 +1,32 @@
+# environments
+export PATH=~/Snowflake/trunk/ExecPlatform/bin:$PATH
+export PATH=~/.local/bin:$PATH
+export PATH=~/.config/emacs/bin:$PATH
+export PATH=/usr/local/bin/:$PATH
+
+alias brc="source ~/.bashrc"
+alias clean="cd ~/Snowflake/trunk/GSAll; mvn clean install -DSkipTests"
+alias regress="cd ~/Snowflake/trunk/RegressionTests"
+alias xp="home && cd ExecPlatform"
+alias home="cd ~/Snowflake/trunk"
+alias show=". ~/sf/deployments/reg/RegressionTests/.showdiffs"
+alias fixdiff=". ~/sf/deployments/reg/RegressionTests/.fixdiffs"
+alias precommit="regress && make precommit DEPLOYMENT=RT TEST_GROUP=0"
+alias format="home && ExecPlatform/bin/format-xp-source ExecPlatform/src/* > ~/format"
+alias apply="home && patch -p0 < ~/format && rm ~/format"
+alias xpall="xp && make test"
+alias xpunit="xp && make test_RsoExternalFunctionTest"
+alias prune="git remote prune origin"
+alias precommit_no_abort="regress && SF_FAST_FAIL=10000 RT_PC_ENV="SF_FAST_FAIL" make precommit DEPLOYMENT=RT TEST_GROUP=0"
+alias precommit_choose="regress && make precommit DEPLOYMENT=RT"
+alias precommit_suite="regress && make precommit DEPLOYMENT=RT REBALANCE=1"
+alias precommit_extfunc="regress && make precommit DEPLOYMENT=RT TEST_GROUP=t_extfunctions:core"
+alias fixjail="rm -rf /tmp/jail_mount_server_*"
+alias remote_build_login="export SF_CLI_PRECOMMIT_MTLS_AUTHENTICATION_ENABLED=true; ~/Snowflake/trunk/tools/remote_build_login.sh"
+alias cleanupxpbins='rm -rf /tmp/jail_mount_server_* bin/snowflake bin/python_udf_server bin/java_udf_server build/Debug/snowflake build/Debug/java_udf_server build/Debug/python_udf_server'
+
+export SF_CLI_PRECOMMIT_MTLS_AUTHENTICATION_ENABLED=false
+
+# User specific aliases and functions
+[ -f ~/.jenkinstoken ] && source ~/.jenkinstoken
+[ -f ~/.awscredentials ] && source ~/.awscredentials

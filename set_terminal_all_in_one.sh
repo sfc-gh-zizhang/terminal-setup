@@ -67,3 +67,4 @@ plugins=(
 ' >> "$ZSHRC"
 fi
 
+cat env >> ~/.zshrc 
