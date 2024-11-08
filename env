@@ -30,3 +30,5 @@ export SF_CLI_PRECOMMIT_MTLS_AUTHENTICATION_ENABLED=false
 # User specific aliases and functions
 [ -f ~/.jenkinstoken ] && source ~/.jenkinstoken
 [ -f ~/.awscredentials ] && source ~/.awscredentials
+
+export HISTFILE=~/.zsh_history
