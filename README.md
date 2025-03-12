@@ -21,8 +21,3 @@ git clone git@github.com:sfc-gh-zizhang/terminal-setup.git && cd ./terminal-setu
 zsh
 ```
 And then restart your terminal.
-
-## After make refresh
-```
-bash set_terminal_all_in_one.sh
-```
